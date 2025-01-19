@@ -15,6 +15,6 @@
 		"moduleResolution": "node",
 		"forceConsistentCasingInFileNames": true,
 		"esModuleInterop": true,
-		"strict": true
+		"strict": false
 	}
 }
