@@ -8,7 +8,8 @@
 node_modules
 
 # build
-dist
+#dist just for me to not have to publish to a registry
+
 
 # logs
 logs
