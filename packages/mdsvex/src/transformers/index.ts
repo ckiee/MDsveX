@@ -93,7 +93,7 @@ export function escape_code({ blocks }: { blocks: boolean }): Transformer {
 
 // remark-parse already partially escapes <>'s, but then re-emits them raw in the AST,
 // which we stringify raw (Should we be?)
-export function escape_angle_brackets(): Transformer {
+export function escape_brackets(): Transformer {
 	const entites: Array<[RegExp, string]> = [
 		// remark-parse does not transform \<
 		[/\\</g, '&lt;'],
@@ -101,6 +101,10 @@ export function escape_angle_brackets(): Transformer {
 		[/^>$/g, '&gt;'],
 		// remark-parse transforms &lt; to '<'
 		[/^<$/g, '&lt;'],
+
+		// svelte templating {}'s -- similar story.
+		[/^{$/g, '&#123;'],
+		[/^}$/g, '&#125;']
 	];
 
 	return function (tree) {
