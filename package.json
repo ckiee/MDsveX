@@ -15,6 +15,7 @@
 		"site:dev": "pnpm --filter @mdsvex/site dev",
 		"site:build": "pnpm --filter @mdsvex/site build"
 	},
+  "workspaces": ["packages/*"],
 	"keywords": [
 		"test",
 		"preprocessor",

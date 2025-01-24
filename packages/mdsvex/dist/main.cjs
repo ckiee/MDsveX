@@ -23641,7 +23641,7 @@ function escape_code({ blocks }) {
 
 // remark-parse already partially escapes <>'s, but then re-emits them raw in the AST,
 // which we stringify raw (Should we be?)
-function escape_angle_brackets() {
+function escape_brackets() {
 	const entites = [
 		// remark-parse does not transform \<
 		[/\\</g, '&lt;'],
@@ -23649,6 +23649,10 @@ function escape_angle_brackets() {
 		[/^>$/g, '&gt;'],
 		// remark-parse transforms &lt; to '<'
 		[/^<$/g, '&lt;'],
+
+		// svelte templating {}'s -- similar story.
+		[/^{$/g, '&#123;'],
+		[/^}$/g, '&#125;']
 	];
 
 	return function (tree) {
@@ -24210,7 +24214,7 @@ function transform(
 		.use(markdown)
 		.use(mdsvex_parser)
 		.use(external, { target: false, rel: ['nofollow'] })
-		.use(escape_angle_brackets)
+		.use(escape_brackets)
 		.use(escape_code, { blocks: !!highlight })
 		.use(extract_frontmatter, [{ type: fm_opts.type, marker: fm_opts.marker }])
 		.use(parse_frontmatter, { parse: fm_opts.parse, type: fm_opts.type });
