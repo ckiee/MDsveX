@@ -23783,6 +23783,10 @@ function extract_parts(nodes) {
 		sorted.forEach((next) => {
 			parts[next[0]].push({
 				type: 'raw',
+        // provide position info for simple cases.
+        // more complex ones should also be possible
+        position: (nodes[i].value ).length == next[2] && next[1] == 0
+          ? nodes[i].position : undefined,
 				value: (nodes[i].value ).substring(next[1], next[2]),
 			});
 		});

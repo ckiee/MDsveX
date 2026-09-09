@@ -235,6 +235,10 @@ function extract_parts(nodes: Array<Element | Text>): Parts {
 		sorted.forEach((next) => {
 			parts[next[0]].push({
 				type: 'raw',
+        // provide position info for simple cases.
+        // more complex ones should also be possible
+        position: (nodes[i].value as string).length == next[2] && next[1] == 0
+          ? nodes[i].position : undefined,
 				value: (nodes[i].value as string).substring(next[1], next[2]),
 			});
 		});
